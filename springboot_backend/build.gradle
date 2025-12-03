@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.8'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'checkstyle'
 }
 
 group = 'com.example'
@@ -21,6 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -30,4 +32,46 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+checkstyle {
+	toolVersion = '10.18.2'
+	// Inline a tiny, valid config to avoid external resolution/doctype issues in CI
+	config = resources.text.fromString("""<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+          "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+          "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<module name="Checker">
+  <property name="severity" value="warning"/>
+  <module name="TreeWalker">
+    <module name="LineLength">
+      <property name="max" value="140"/>
+      <property name="ignorePattern" value="^package.*|^import.*"/>
+    </module>
+    <module name="UnusedImports"/>
+    <module name="AvoidStarImport"/>
+    <module name="WhitespaceAround"/>
+    <module name="WhitespaceAfter"/>
+  </module>
+</module>
+""")
+	ignoreFailures = true
+	showViolations = true
+}
+
+tasks.named('check') {
+	dependsOn 'checkstyleMain', 'checkstyleTest'
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java']
+		}
+	}
+	test {
+		java {
+			srcDirs = ['src/test/java']
+		}
+	}
 }

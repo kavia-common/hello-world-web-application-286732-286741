@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title th:text="${title} ?: 'Spring Boot App'">Spring Boot App</title>
+  <link rel="stylesheet" href="/css/ocean.css" />
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <header class="app-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-text">Spring Boot + Thymeleaf</span>
+      </div>
+      <nav class="nav">
+        <a class="nav-link" href="/" aria-current="page">Home</a>
+        <a class="nav-link" href="/hello">Hello</a>
+        <a class="nav-link" href="/swagger-ui.html" target="_blank" rel="noopener">API Docs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="surface card" th:fragment="content">
+      <!-- Page content will be inserted here by including this layout and replacing the fragment -->
+      <p>Content</p>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container footer-inner">
+      <span>© <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Ocean Professional Theme</span>
+      <span><a class="footer-link" href="/docs">Open API Docs</a></span>
+    </div>
+  </footer>
+</body>
+</html>

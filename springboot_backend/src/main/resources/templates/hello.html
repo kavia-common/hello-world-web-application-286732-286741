@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: content">
+<div class="stack">
+  <div class="card padded">
+    <h2 class="section-title" th:text="${greeting}">Hello from Thymeleaf!</h2>
+    <p th:text="${info}">This page is rendered server-side using Thymeleaf.</p>
+  </div>
+  <div class="card info-card">
+    <div class="info-line">
+      <span class="info-label">Timestamp:</span>
+      <span class="info-value" th:text="${timestamp}">2025-01-01T00:00:00Z</span>
+    </div>
+    <div class="info-line">
+      <span class="info-label">Docs:</span>
+      <a class="info-link" href="/swagger-ui.html">Swagger UI</a>
+    </div>
+  </div>
+</div>
+</html>

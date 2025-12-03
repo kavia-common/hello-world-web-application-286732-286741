@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: content">
+<div class="hero">
+  <h1 class="hero-title" th:text="${message}">Welcome to the App</h1>
+  <p class="hero-subtitle">A clean, modern Spring Boot + Thymeleaf starter styled with Ocean Professional.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="/hello" th:text="${cta} ?: 'Go to Hello'">Go to Hello</a>
+    <a class="btn btn-secondary" href="/swagger-ui.html" target="_blank" rel="noopener">Swagger UI</a>
+  </div>
+</div>
+</html>
